@@ -1,0 +1,23 @@
+#!/bin/ash
+
+. /etc/profile
+
+INFO_TEXT=$(echo '{"jsonrpc": "2.0", "id": 1,"method":"get_info_text", "params":{}}' | mica-rpc https://mica/ws/)
+VARIANT=$(echo $INFO_TEXT | sed -e 's/.*"Product Name:\s*\([^"]*\)".*/\1/')
+VERSION=$(echo $INFO_TEXT | sed -e 's/.*"Base Version:\s*\([^"]*\)".*/\1/')
+REVISION=$(echo $INFO_TEXT | sed -e 's/.*"Product Revision:\s*\([^"]*\)".*/\1/')
+
+echo -e "export MICA_SERIAL=$MICA_SERIAL\nexport MICA_VARIANT='$VARIANT'\nexport MICA_VERSION='$VERSION'\nexport MICA_REVISION='$REVISION'\nexport MICA_NAME=$MICA_NAME\nexport HOSTNAME=$HOSTNAME" > /etc/profile.d/mica.sh
+
+if [ ! -d /opt/depot/files ]; then
+  mkdir /opt/depot/files
+
+  PROFILE=default
+  if [ -f "/opt/depot/profiles/$VARIANT" ]; then
+	PROFILE=$VARIANT
+  fi
+
+  while read name; do
+    ln -s ../apps/$name /opt/depot/files/
+  done < "/opt/depot/profiles/$PROFILE"
+fi

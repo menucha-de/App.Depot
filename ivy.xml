@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ivy-module version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+
+	<info organisation="havis/net" module="depot" default="true" />
+
+	<configurations>
+		<conf name="default" />
+	</configurations>
+
+	<dependencies>
+		<dependency org="havis/device/io" name="mica-${platform}" rev="${havis.version}" conf="default" />
+		<dependency org="havis/device/io" name="empty" rev="${havis.version}" conf="default->app" />
+		<dependency org="havis/device/rf" name="nur-${platform}" rev="${havis.version}" conf="default->app" />
+		<dependency org="havis/llrpservice" name="server-${platform}" rev="${havis.version}" conf="default->app" />
+		<dependency org="havis/net" name="aim-${platform}" rev="${havis.version}" conf="default->app" />
+		<dependency org="havis/custom/harting" name="tools" rev="${havis.version}" conf="default->app" />
+		<dependency org="havis/custom/harting" name="monitortransport" rev="${havis.version}" conf="default->app" />
+		<dependency org="havis/custom/harting" name="rfidhardwaremonitor" rev="${havis.version}" conf="default->app" />
+		<dependency org="havis/custom/harting/modbus" name="reader-${platform}" rev="${havis.version}" conf="default->app" />
+	</dependencies>
+
+</ivy-module>

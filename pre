@@ -1,0 +1,5 @@
+#!/bin/bash
+if [ ! -f $BUILD/rfs ]; then
+    mkdir $BUILD/rfs
+fi
+cp -a resources/target/* $BUILD/rfs/

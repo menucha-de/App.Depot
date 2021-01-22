@@ -1,0 +1,2 @@
+#!/bin/bash
+rm -f $BUILD/rfs/etc/rc2.d/*dropbear

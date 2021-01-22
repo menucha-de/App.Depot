@@ -1,0 +1,6 @@
+Package: @NAME@
+Version: @Bundle-Version@
+Architecture: @ARCH@
+Maintainer: @Bundle-Vendor@
+Depends: busybox
+Description: @Bundle-Name@

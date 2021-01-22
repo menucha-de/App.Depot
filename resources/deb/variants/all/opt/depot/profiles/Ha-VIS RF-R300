@@ -1,0 +1,8 @@
+havis.device.io-mica.app
+havis.device.rf-nur.app
+havis.llrp-server.app
+havis.opc-ua.app
+havis.custom.harting.modbus.reader.app
+havis.custom.harting.tools.app
+havis.custom.harting.monitortransport.app
+havis.custom.harting.rfidhardwaremonitor.app

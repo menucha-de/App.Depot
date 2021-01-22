@@ -1,0 +1,49 @@
+<html>
+<head>
+    <style>
+	    * {
+	    font-family: Arial;
+	    outline: none;
+		}
+		
+		body > div {
+			display: flex;
+			display: -ms-flex;
+			flex-direction: row;
+			-ms-flex-direction: row;
+			align-items: center;
+			-ms-flex-align: center;
+			font-size: 1.5em;
+		}
+		
+		body > div:first-child {
+			font-weight: bold;
+			margin-bottom: 40px;
+		}
+		
+		body > div:last-child {
+			font-style: italic;
+		}
+		
+		.apps {
+			margin-left: 10px;
+			margin-right: 10px;
+		}
+		
+		.info {
+			height: 40px;
+			width: 40px;
+			margin-right: 10px;
+		}
+    </style>
+</head>
+
+<body>
+	<div>
+		<div>Please use the Apps container</div><img src="images/Icon_Apps.png" class="apps"/><div>to manage and control your applications.</div>
+	</div>
+	<div>
+		<img src="images/info.png" class="info"/><div>This container is only used internally by the Apps container.</div>
+	</div>
+</body>
+</html>

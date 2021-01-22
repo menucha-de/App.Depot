@@ -1,0 +1,10 @@
+[Unit]
+Description=Depot
+
+[Service]
+Type=simple
+ExecStart=/etc/init.d/httpd run
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
