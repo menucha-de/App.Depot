@@ -161,6 +161,8 @@
 			<touch file="${build.dir}/deb/opt/depot/apps/havis.custom.harting.rfidhardwaremonitor.app" datetime="${current.timestamp}" pattern="${timestamp.pattern}" />
 		</sequential>		
 
+		<mkdir dir="${build.dir}/deb/usr/share/doc" />
+
 		<exec executable="fakeroot">
 			<arg value="dpkg" />
 			<arg value="-b" />
