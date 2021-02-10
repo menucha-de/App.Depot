@@ -12,7 +12,6 @@ if [ "$PACKAGING" ]; then
 
   if [ "$PUBLISH" ]; then
     publish_debs
-    publish_ivy ivy
   fi
 fi
 

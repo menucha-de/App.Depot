@@ -117,12 +117,4 @@
 			<touch file="${build.dir}/deb/opt/depot/apps/havis.custom.harting.rfidhardwaremonitor.app" datetime="${current.timestamp}" pattern="${timestamp.pattern}" />
 		</sequential>
 	</target>
-
-	<target name="publish" description="Publishes the package to the repository">
-		<ivy:resolve file="${resources.dir}/ivy.xml" />
-
-		<ivy:publish resolver="${ivy.resolver}" pubrevision="${manifest.Bundle-Version}" status="integration" overwrite="true">
-			<artifacts pattern="${build.dir}/[artifact].[ext]" />
-		</ivy:publish>
-	</target>
 </project>
