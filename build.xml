@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="havis-depot" default="publish" xmlns:ivy="antlib:org.apache.ivy.ant" xmlns:if="ant:if" xmlns:unless="ant:unless">
+<project name="havis-depot" default="apps" xmlns:ivy="antlib:org.apache.ivy.ant" xmlns:if="ant:if" xmlns:unless="ant:unless">
 
 	<property file="${basedir}/build.properties" />
 	<property name="basename" value="${ant.project.name}" />
@@ -19,18 +19,6 @@
 			<isset property="ivy.resolver" />
 		</condition>
 		<fail message="Missing property 'ivy.url'. Does 'build.properties' file exists?" unless="ivy.url" />
-
-		<condition property="legacy" value="false">
-			<not>
-				<isset property="legacy"/>
-			</not>
-		</condition>
-		<condition property="postfix" value="-legacy">
-			<istrue value="${legacy}"/>
-		</condition>
-		<condition property="postfix" value="">
-			<isfalse value="${legacy}"/>
-		</condition>
 
 		<condition property="arch" value="amd64">
 			<matches pattern="^linux-amd64$" string="${platform}" />
@@ -69,110 +57,68 @@
 		</sequential>
 	</macrodef>
 
-	<target name="deb" depends="check.build.properties">
-		<mkdir dir="${build.dir}" />
-
-		<copy todir="${build.dir}/deb">
-			<fileset dir="${resources.dir}/deb/variants/all/" includes="**/*.html DEBIAN/*" />
-			<fileset dir="${resources.dir}/deb/variants/legacy/" includes="**/*.html DEBIAN/*" if:true="${legacy}" />
-			<fileset dir="${resources.dir}/deb/variants/debian/" includes="**/*.html DEBIAN/*" unless:true="${legacy}" />
-			<filterset refid="manifest" />
-			<filterset>
-				<filter token="NAME" value="${basename}" />
-				<filter token="ARCH" value="${arch}" />
-			</filterset>
-		</copy>
-
-		<copy todir="${build.dir}/deb">
-			<fileset dir="${resources.dir}/deb/variants/all/" excludes="**/*.html DEBIAN/*" />
-			<fileset dir="${resources.dir}/deb/variants/legacy/" excludes="**/*.html DEBIAN/*" if:true="${legacy}" />
-			<fileset dir="${resources.dir}/deb/variants/debian/" excludes="**/*.html DEBIAN/*" unless:true="${legacy}" />
-		</copy>
-
-		<mkdir dir="${build.dir}/deb/opt/depot/apps" />
-		<mkdir dir="${build.dir}/deb/opt/depot/files" unless:true="${legacy}" />
-
-		<mkdir dir="${build.dir}/deb/etc/rc2.d" if:true="${legacy}" />
-		<symlink link="${build.dir}/deb/etc/rc2.d/S19mkenv" resource="../init.d/mkenv" overwrite="true" if:true="${legacy}" />
-		<symlink link="${build.dir}/deb/etc/rc2.d/S99httpd" resource="../init.d/httpd" overwrite="true" if:true="${legacy}" />
-		<chmod perm="755">
-			<fileset file="${build.dir}/deb/etc/init.d/httpd" />
-			<fileset file="${build.dir}/deb/etc/init.d/mkenv" if:true="${legacy}" />
-			<fileset file="${build.dir}/deb/opt/depot/www/cgi-bin/depot.sh" />
-			<fileset file="${build.dir}/deb/DEBIAN/postinst" unless:true="${legacy}" />
-		</chmod>
-
-		<ivy:retrieve pattern="${build.dir}/deb/opt/depot/apps/([app]).[ext]" if:true="${legacy}" />
+	<target name="apps" depends="check.build.properties">
+		<ivy:retrieve pattern="${build.dir}/deb/opt/depot/apps/([app]).[ext]" />
 
 		<!-- fix timestamps for correct installation order in Apps container -->
-		<init-timestamp if:true="${legacy}" />
-		<sequential if:true="${legacy}">
+		<init-timestamp />
+		<sequential>
 			<increment-timestamp />
 			<local name="current.timestamp" />
 			<property file="${timestamp.file}" />
 			<touch file="${build.dir}/deb/opt/depot/apps/havis.device.io-empty.app" datetime="${current.timestamp}" pattern="${timestamp.pattern}" />
 		</sequential>
-		<sequential if:true="${legacy}">
+		<sequential>
 			<increment-timestamp />
 			<local name="current.timestamp" />
 			<property file="${timestamp.file}" />
 			<touch file="${build.dir}/deb/opt/depot/apps/havis.device.io-mica.app" datetime="${current.timestamp}" pattern="${timestamp.pattern}" />
 		</sequential>
-		<sequential if:true="${legacy}">
+		<sequential>
 			<increment-timestamp />
 			<local name="current.timestamp" />
 			<property file="${timestamp.file}" />
 			<touch file="${build.dir}/deb/opt/depot/apps/havis.device.rf-nur.app" datetime="${current.timestamp}" pattern="${timestamp.pattern}" />
 		</sequential>
-		<sequential if:true="${legacy}">
+		<sequential>
 			<increment-timestamp />
 			<local name="current.timestamp" />
 			<property file="${timestamp.file}" />
 			<touch file="${build.dir}/deb/opt/depot/apps/havis.llrp-server.app" datetime="${current.timestamp}" pattern="${timestamp.pattern}" />
 		</sequential>
-		<sequential if:true="${legacy}">
+		<sequential>
 			<increment-timestamp />
 			<local name="current.timestamp" />
 			<property file="${timestamp.file}" />
 			<touch file="${build.dir}/deb/opt/depot/apps/havis.opc-ua.app" datetime="${current.timestamp}" pattern="${timestamp.pattern}" />
 		</sequential>
-		<sequential if:true="${legacy}">
+		<sequential>
 			<increment-timestamp />
 			<local name="current.timestamp" />
 			<property file="${timestamp.file}" />
 			<touch file="${build.dir}/deb/opt/depot/apps/havis.custom.harting.modbus.reader.app" datetime="${current.timestamp}" pattern="${timestamp.pattern}" />
 		</sequential>
-		<sequential if:true="${legacy}">
+		<sequential>
 			<increment-timestamp />
 			<local name="current.timestamp" />
 			<property file="${timestamp.file}" />
 			<touch file="${build.dir}/deb/opt/depot/apps/havis.custom.harting.tools.app" datetime="${current.timestamp}" pattern="${timestamp.pattern}" />
 		</sequential>
-		<sequential if:true="${legacy}">
+		<sequential>
 			<increment-timestamp />
 			<local name="current.timestamp" />
 			<property file="${timestamp.file}" />
 			<touch file="${build.dir}/deb/opt/depot/apps/havis.custom.harting.monitortransport.app" datetime="${current.timestamp}" pattern="${timestamp.pattern}" />
 		</sequential>
-		<sequential if:true="${legacy}">
+		<sequential>
 			<increment-timestamp />
 			<local name="current.timestamp" />
 			<property file="${timestamp.file}" />
 			<touch file="${build.dir}/deb/opt/depot/apps/havis.custom.harting.rfidhardwaremonitor.app" datetime="${current.timestamp}" pattern="${timestamp.pattern}" />
-		</sequential>		
-
-		<mkdir dir="${build.dir}/deb/usr/share/doc" />
-
-		<exec executable="fakeroot">
-			<arg value="dpkg" />
-			<arg value="-b" />
-			<arg value="${build.dir}/deb" />
-			<arg value="${build.dir}/${basename}${postfix}.deb" />
-		</exec>
-		<echo file="${build.dir}/${basename}${postfix}_${manifest.Bundle-Version}_${arch}.dsc" append="false">Format: 3.0 (native)${line.separator}Source: ${basename}${line.separator}Architecture: ${arch}${line.separator}Version: ${manifest.Bundle-Version}</echo>
+		</sequential>
 	</target>
 
-	<target name="publish" depends="deb" description="Publishes the package to the repository">
+	<target name="publish" description="Publishes the package to the repository">
 		<ivy:resolve file="${resources.dir}/ivy.xml" />
 
 		<ivy:publish resolver="${ivy.resolver}" pubrevision="${manifest.Bundle-Version}" status="integration" overwrite="true">

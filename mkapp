@@ -8,17 +8,11 @@ env
 . /usr/share/mkapp/functions
 
 if [ "$PACKAGING" ]; then
-  set_env $ARCH
-
-  ant_build -Dlegacy=${LEGACY}
+  build -F
 
   if [ "$PUBLISH" ]; then
-    publish_ivy ivy
-  fi
-
-  if [ "$PUBLISH" ]; then
-    dpkg-name target/*.deb
-    publish_debs
+    #publish_debs
+    #publish_ivy ivy
   fi
 fi
 

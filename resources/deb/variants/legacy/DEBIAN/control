@@ -1,7 +1,0 @@
-Package: @NAME@-legacy
-Version: @Bundle-Version@
-Architecture: @ARCH@
-Depends: libwebsockets8, mica-rpc
-Provides: httpd
-Maintainer: @Bundle-Vendor@
-Description: @Bundle-Name@

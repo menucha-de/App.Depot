@@ -1,0 +1,8 @@
+Source: havis-depot
+Maintainer: HARTING IT_SD <opensource@HARTING.com>
+Build-Depends: debhelper, dh-exec, default-jdk-headless:amd64, ant:all, ivy:all, libjsch-java:all
+ 
+Package: havis-depot
+Architecture: any
+Depends: busybox
+Description: Ha-VIS Depot
