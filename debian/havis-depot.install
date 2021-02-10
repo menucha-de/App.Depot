@@ -1,2 +1,2 @@
-rfs/lib/systemd/system/depot.service /lib/systemd/system/
-rfs/opt/depot /opt/
+deb/lib/systemd/system/depot.service /lib/systemd/system/
+deb/opt/depot /opt/
