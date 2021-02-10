@@ -8,8 +8,9 @@ override_dh_auto_configure:
 
 override_dh_builddeb:
 	dh_builddeb -- -Zgzip
-	mkdir target
+	mkdir -p target
 	cp ../*.deb target/havis-depot.deb
 	ant -Dkeyfile=${keyfile} -Divy.resolver=$(RESOLVER) -Divy.url=$(IVY) -Divy.default.ivy.user.dir=/tmp -Divy.settings=ivysettings_remote.xml -Dapi.url=$(API) -Dplatform=$(JAVA_PLATFORM) -Djavac.debug=$(DEBUG) publish
+	rm -rf target
 
 override_dh_auto_build:
