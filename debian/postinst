@@ -1,0 +1,21 @@
+ #!/bin/sh
+ 
+set -e
+
+deb-systemd-helper unmask depot.service >/dev/null || true
+
+if deb-systemd-helper --quiet was-enabled depot.service; then
+	deb-systemd-helper enable depot.service >/dev/null || true
+else
+	deb-systemd-helper update-state depot.service >/dev/null || true
+fi
+
+if [ -d /run/systemd/system ]; then
+	systemctl --system daemon-reload >/dev/null || true
+	if [ -n "$2" ]; then
+		_dh_action=try-restart
+	else
+		_dh_action=start
+	fi
+	deb-systemd-invoke $_dh_action depot.service >/dev/null || true
+fi
