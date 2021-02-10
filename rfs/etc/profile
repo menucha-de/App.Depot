@@ -1,0 +1,8 @@
+export LANG="C.UTF-8"
+
+if [ "`id -u`" -eq 0 ]; then
+  PATH="/usr/sbin:/usr/bin:/sbin:/bin"
+else
+  PATH="/usr/bin:/bin"
+fi
+export PATH

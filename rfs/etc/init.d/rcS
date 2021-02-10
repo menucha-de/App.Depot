@@ -1,0 +1,3 @@
+#!/bin/ash
+
+run-parts -a start /etc/rcS.d
