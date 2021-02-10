@@ -1,8 +1,19 @@
 #!/bin/sh
 
-. ../../etc/default/httpd
+### BEGIN INIT INFO
+# Provides:		havis-depot
+# Required-Start:	$remote_fs $syslog
+# Required-Stop:	$remote_fs $syslog
+# Default-Start:	2 3 4 5
+# Default-Stop:		0 1 6
+# Short-Description:	Ha-VIS Depot
+# Description: 
+#
+### END INIT INFO
 
-NAME=httpd
+. ../../etc/default/havis-depot
+
+NAME=havis-depot
 DAEMON=/bin/busybox
 PID=/run/"$NAME".pid
 ARGS="httpd -f -h /opt/depot/www $ARGS"

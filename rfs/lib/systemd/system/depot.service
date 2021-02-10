@@ -3,7 +3,7 @@ Description=Depot
 
 [Service]
 Type=simple
-ExecStart=/etc/init.d/httpd run
+ExecStart=/etc/init.d/havis-depot run
 Restart=on-failure
 
 [Install]

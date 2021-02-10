@@ -1,4 +1,2 @@
-rfs/etc/default/httpd /etc/default/
-rfs/etc/init.d/httpd /etc/init.d/
 rfs/lib/systemd/system/depot.service /lib/systemd/system/
 rfs/opt/depot /opt/
