@@ -11,7 +11,7 @@ if [ "$PACKAGING" ]; then
   build -F
 
   if [ "$PUBLISH" ]; then
-    #publish_debs
+    publish_debs
     publish_ivy ivy
   fi
 fi
