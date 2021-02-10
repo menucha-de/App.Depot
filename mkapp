@@ -10,10 +10,10 @@ env
 if [ "$PACKAGING" ]; then
   build -F
 
-  if [ "$PUBLISH" ]; then
+  #if [ "$PUBLISH" ]; then
     #publish_debs
     #publish_ivy ivy
-  fi
+  #fi
 fi
 
 if [ "$IMAGING" ]; then
