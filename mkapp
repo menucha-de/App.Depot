@@ -23,7 +23,7 @@ if [ "$IMAGING" ]; then
 
   cat  >> Dockerfile <<EOF
 
-RUN ["busybox", "--install", "-s"]
+RUN ["/bin/busybox", "--install", "-s"]
 
 EOF
   finish '/opt/depot' '["/sbin/init"]'
