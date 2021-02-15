@@ -28,5 +28,6 @@ RUN ["/bin/busybox", "--install", "-s"]
 EOF
   finish '/opt/depot' '["/sbin/init"]'
   mkdir -p rfs/bin rfs/usr/bin rfs/sbin rfs/usr/sbin rfs/tmp rfs/var/lib/dpkg/info
+  ant -Divy.resolver=$RESOLVER -Divy.url=$IVY -Divy.default.ivy.user.dir=/tmp -Divy.settings=ivysettings_remote.xml -Dapi.url=$API -Dplatform=$JAVA_PLATFORM -Djavac.debug=$DEBUG
   cat Dockerfile
 fi
