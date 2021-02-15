@@ -27,7 +27,18 @@ RUN ["busybox", "--install", "-s"]
 
 EOF
   finish '/opt/depot' '["/sbin/init"]'
-  mkdir -p rfs/bin rfs/usr/bin rfs/sbin rfs/usr/sbin rfs/tmp rfs/var/lib/dpkg/info
+  mkdir -p rfs/bin rfs/usr/bin rfs/sbin rfs/usr/sbin rfs/tmp rfs/var/lib/dpkg/info rfs/dev/pts rfs/dev/shm
+  mknod "rfs/dev/null" c 1 3
+  mknod "rfs/dev/zero" c 1 5
+  mknod "rfs/dev/full" c 1 7
+  mknod "rfs/dev/random" c 1 8
+  mknod "rfs/dev/urandom" c 1 9
+  mknod "rfs/dev/tty" c 5 0
+  mknod "rfs/dev/ptmx" c 5 2
+  ln -sf /proc/self/fd "rfs/dev/fd"
+  ln -sf /proc/self/fd/0 "rfs/dev/stdin"
+  ln -sf /proc/self/fd/1 "rfs/dev/stdout"
+  ln -sf /proc/self/fd/2 "rfs/dev/stderr"
   set_env $ARCH
   ant -Divy.resolver=$RESOLVER -Divy.url=$IVY -Divy.default.ivy.user.dir=/tmp -Divy.settings=ivysettings_remote.xml -Dapi.url=$API -Dplatform=$JAVA_PLATFORM -Djavac.debug=$DEBUG
   cat Dockerfile
