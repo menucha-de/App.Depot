@@ -58,6 +58,7 @@
 	</macrodef>
 
 	<target name="apps" depends="check.build.properties">
+		<mkdir dir="${build.dir}" />
 		<ivy:retrieve pattern="rfs/opt/depot/apps/([app]).[ext]" />
 
 		<!-- fix timestamps for correct installation order in Apps container -->
