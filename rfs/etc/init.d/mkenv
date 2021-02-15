@@ -9,8 +9,8 @@ REVISION=$(echo $INFO_TEXT | sed -e 's/.*"Product Revision:\s*\([^"]*\)".*/\1/')
 
 echo -e "export MICA_SERIAL=$MICA_SERIAL\nexport MICA_VARIANT='$VARIANT'\nexport MICA_VERSION='$VERSION'\nexport MICA_REVISION='$REVISION'\nexport MICA_NAME=$MICA_NAME\nexport HOSTNAME=$HOSTNAME" > /etc/profile.d/mica.sh
 
-if [ ! -d /opt/depot/files ]; then
-  mkdir /opt/depot/files
+if [ ! -f /opt/depot/files.init ]; then
+  touch /opt/depot/files.init
 
   PROFILE=default
   if [ -f "/opt/depot/profiles/$VARIANT" ]; then
