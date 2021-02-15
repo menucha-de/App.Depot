@@ -22,7 +22,9 @@ if [ "$IMAGING" ]; then
   ROOT=rfs assume libc6 armhf 2.24
 
   cat  >> Dockerfile <<EOF
+
 RUN ["busybox", "--install", "-s"]
+
 EOF
   finish '/opt/depot' '["/sbin/init"]'
   mkdir -p rfs/bin rfs/usr/bin rfs/sbin rfs/usr/sbin rfs/tmp rfs/var/lib/dpkg/info
