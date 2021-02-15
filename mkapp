@@ -27,7 +27,7 @@ RUN ["busybox", "--install", "-s"]
 
 EOF
   finish '/opt/depot' '["/sbin/init"]'
-  mkdir -p rfs/bin rfs/usr/bin rfs/sbin rfs/usr/sbin rfs/tmp rfs/var/lib/dpkg/info rfs/dev/pts rfs/dev/shm
+  mkdir -p rfs/bin rfs/usr/bin rfs/sbin rfs/usr/sbin rfs/tmp rfs/var/lib/dpkg/info rfs/dev/pts rfs/dev/shm rfs/etc/profile.d
   mknod "rfs/dev/null" c 1 3
   mknod "rfs/dev/zero" c 1 5
   mknod "rfs/dev/full" c 1 7
