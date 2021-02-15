@@ -19,15 +19,16 @@ if [ "$IMAGING" ]; then
   init
   update
   setup havis-depot libwebsockets8 mica-rpc
-  ROOT=rfs assume libc6 armhf 2.24
+  ROOT=rfs assume libc6 $ARCH 2.24
 
   cat  >> Dockerfile <<EOF
 
-RUN ["/bin/busybox", "--install", "-s"]
+RUN ["busybox", "--install", "-s"]
 
 EOF
   finish '/opt/depot' '["/sbin/init"]'
   mkdir -p rfs/bin rfs/usr/bin rfs/sbin rfs/usr/sbin rfs/tmp rfs/var/lib/dpkg/info
+  set_env $ARCH
   ant -Divy.resolver=$RESOLVER -Divy.url=$IVY -Divy.default.ivy.user.dir=/tmp -Divy.settings=ivysettings_remote.xml -Dapi.url=$API -Dplatform=$JAVA_PLATFORM -Djavac.debug=$DEBUG
   cat Dockerfile
 fi
