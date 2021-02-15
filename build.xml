@@ -115,7 +115,7 @@
 			<increment-timestamp />
 			<local name="current.timestamp" />
 			<property file="${timestamp.file}" />
-			<touch file="rfs-${arch}/opt/depot/apps/havis.custom.harting.rfidhardwaremonitor.app" datetime="${current.timestamp}" pattern="${timestamp.pattern}" />
+			<touch file="rfs/opt/depot/apps/havis.custom.harting.rfidhardwaremonitor.app" datetime="${current.timestamp}" pattern="${timestamp.pattern}" />
 		</sequential>
 	</target>
 </project>
