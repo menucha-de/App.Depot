@@ -1,5 +1,0 @@
-#!/bin/ash
-
-run-parts -a stop --reverse /etc/rcS.d
-
-halt
