@@ -3,6 +3,9 @@ name: Build app
 on:
   workflow_dispatch:
     inputs:
+      version:
+        description: 'Version'
+        required: true
       arch:
         description: 'Architecture'
         default: 'armhf'
