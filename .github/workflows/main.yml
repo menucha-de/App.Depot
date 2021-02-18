@@ -13,7 +13,11 @@ on:
       packaging:
         description: 'Packaging'
       imaging:
-        description: 'Imaging'      
+        description: 'Imaging'
+      image:
+        description: 'Image'
+        default: 'https://github.com/peramic/Tools.Debootstrap/releases/download/v2.7.0/debian_stretch_2.7.0.tar.gz'
+        required: true
       maintainer:
         description: 'Maintainer'
         default: "Open Source <opensource@peraMIC.io>"
@@ -61,6 +65,17 @@ jobs:
           imaging: ${{ github.event.inputs.imaging }}
           maintainer: ${{ github.event.inputs.maintainer }}
           support: ${{ github.event.inputs.support }}
+      - run: docker run --workdir /github/workspace --rm --privileged -e ARCH -e DIST -e APT -e MIRROR -e VERSION -e IMAGE -e MAINTAINER -e SUPPORT --entrypoint bash -v "$GITHUB_WORKSPACE":"/github/workspace" debian:stretch-slim "-c" "./mkimg"
+        #if: ${{ github.event.inputs.imaging }}
+        env:
+          ARCH: 'armhf'
+          DIST: 'stretch'
+          APT: 'https://peramic.github.io/debian'
+          MIRROR: 'http://httpredir.debian.org/debian'
+          VERSION: ${{ github.event.inputs.version }}
+          IMAGE: ${{ github.event.inputs.image }}
+          MAINTAINER: ${{ github.event.inputs.maintainer }}
+          SUPPORT: ${{ github.event.inputs.support }}
       - name: Build and push
         uses: docker/build-push-action@v2
         if: ${{ github.event.inputs.imaging }}
