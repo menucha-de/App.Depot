@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set -x
+set -e
+
+env
+
+apt-get update
+apt-get -y -q install apt-transport-https
+
+echo "deb [trusted=yes] $APT ${DIST%%-*} main" > /etc/apt/sources.list.d/local.list
+if [[ "${DIST##*-}" == "updates" ]] || [[ "${DIST##*-}" == "staging" ]]; then
+  echo "deb [trusted=yes] $APT $DIST main" >> /etc/apt/sources.list.d/local.list
+fi
+
+apt-get update
+apt-get -y -q install appbuild-essential
+
+export PACKAGE=havis-depot
+
+mkapp
