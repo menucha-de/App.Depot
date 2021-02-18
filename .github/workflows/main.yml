@@ -3,9 +3,6 @@ name: Build app
 on:
   workflow_dispatch:
     inputs:
-      version:
-        description: 'Version'
-        required: true
       arch:
         description: 'Architecture'
         default: 'armhf'
@@ -45,19 +42,10 @@ jobs:
         uses: actions/checkout@v2
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
         if: ${{ github.event.inputs.imaging }}
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v1
-        if: ${{ github.event.inputs.imaging }}
-        with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.ACTIONS }}
       - name: Build
-        id: build
         uses: peramic/actions/build-stretch@v1
+        if: ${{ github.event.inputs.packaging }}
         with:
           arch: ${{ github.event.inputs.arch }}
           dist: ${{ github.event.inputs.dist }}
@@ -68,21 +56,33 @@ jobs:
           maintainer: ${{ github.event.inputs.maintainer }}
           support: ${{ github.event.inputs.support }}
       - run: docker run --workdir /github/workspace --rm --privileged -e ARCH -e DIST -e APT -e MIRROR -e VERSION -e IMAGE -e MAINTAINER -e SUPPORT --entrypoint bash -v "$GITHUB_WORKSPACE":"/github/workspace" debian:stretch-slim "-c" "./mkimg"
-        #if: ${{ github.event.inputs.imaging }}
+        if: ${{ github.event.inputs.imaging }}
         env:
           ARCH: 'armhf'
           DIST: 'stretch'
           APT: 'https://peramic.github.io/debian'
           MIRROR: 'http://httpredir.debian.org/debian'
-          VERSION: ${{ github.event.inputs.version }}
           IMAGE: ${{ github.event.inputs.image }}
           MAINTAINER: ${{ github.event.inputs.maintainer }}
           SUPPORT: ${{ github.event.inputs.support }}
-      - name: Build and push
-        uses: docker/build-push-action@v2
+        id: build
+      - name: Create Release
+        id: release
+        uses: actions/create-release@v1
         if: ${{ github.event.inputs.imaging }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          context: .
-          tags: ${{ github.event.inputs.tags }}
-          platforms: ${{ github.event.inputs.platforms }}
-          push: true
+          tag_name: v${{ steps.build.outputs.VERSION }}
+          release_name: Release ${{ steps.build.outputs.VERSION }}
+      - name: Upload Release Asset
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1
+        if: ${{ github.event.inputs.imaging }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.release.outputs.upload_url }}
+          asset_path: ${{ steps.build.outputs.IMAGE }}
+          asset_name: ${{ steps.build.outputs.IMAGE }}
+          asset_content_type: application/zip
