@@ -5,4 +5,5 @@ Build-Depends: debhelper, dh-exec, default-jdk-headless:amd64, ant:all, ivy:all,
 Package: havis-depot
 Architecture: any
 Depends: busybox
+Recommends: mica-rpc
 Description: Ha-VIS Depot
