@@ -58,8 +58,7 @@
 	</macrodef>
 
 	<target name="apps" depends="check.build.properties">
-		<mkdir dir="${build.dir}" />
-		<ivy:retrieve pattern="rfs/opt/depot/apps/([app]).[ext]" />
+		<ivy:retrieve pattern="${build.dir}/rfs/opt/depot/apps/([app]).[ext]" />
 
 		<!-- fix timestamps for correct installation order in Apps container -->
 		<init-timestamp />
@@ -67,55 +66,55 @@
 			<increment-timestamp />
 			<local name="current.timestamp" />
 			<property file="${timestamp.file}" />
-			<touch file="rfs/opt/depot/apps/havis.device.io-empty.app" datetime="${current.timestamp}" pattern="${timestamp.pattern}" />
+			<touch file="${build.dir}/rfs/opt/depot/apps/havis.device.io-empty.app" datetime="${current.timestamp}" pattern="${timestamp.pattern}" />
 		</sequential>
 		<sequential>
 			<increment-timestamp />
 			<local name="current.timestamp" />
 			<property file="${timestamp.file}" />
-			<touch file="rfs/opt/depot/apps/havis.device.io-mica.app" datetime="${current.timestamp}" pattern="${timestamp.pattern}" />
+			<touch file="${build.dir}/rfs/opt/depot/apps/havis.device.io-mica.app" datetime="${current.timestamp}" pattern="${timestamp.pattern}" />
 		</sequential>
 		<sequential>
 			<increment-timestamp />
 			<local name="current.timestamp" />
 			<property file="${timestamp.file}" />
-			<touch file="rfs/opt/depot/apps/havis.device.rf-nur.app" datetime="${current.timestamp}" pattern="${timestamp.pattern}" />
+			<touch file="${build.dir}/rfs/opt/depot/apps/havis.device.rf-nur.app" datetime="${current.timestamp}" pattern="${timestamp.pattern}" />
 		</sequential>
 		<sequential>
 			<increment-timestamp />
 			<local name="current.timestamp" />
 			<property file="${timestamp.file}" />
-			<touch file="rfs/opt/depot/apps/havis.llrp-server.app" datetime="${current.timestamp}" pattern="${timestamp.pattern}" />
+			<touch file="${build.dir}/rfs/opt/depot/apps/havis.llrp-server.app" datetime="${current.timestamp}" pattern="${timestamp.pattern}" />
 		</sequential>
 		<sequential>
 			<increment-timestamp />
 			<local name="current.timestamp" />
 			<property file="${timestamp.file}" />
-			<touch file="rfs/opt/depot/apps/havis.opc-ua.app" datetime="${current.timestamp}" pattern="${timestamp.pattern}" />
+			<touch file="${build.dir}/rfs/opt/depot/apps/havis.opc-ua.app" datetime="${current.timestamp}" pattern="${timestamp.pattern}" />
 		</sequential>
 		<sequential>
 			<increment-timestamp />
 			<local name="current.timestamp" />
 			<property file="${timestamp.file}" />
-			<touch file="rfs/opt/depot/apps/havis.custom.harting.modbus.reader.app" datetime="${current.timestamp}" pattern="${timestamp.pattern}" />
+			<touch file="${build.dir}/rfs/opt/depot/apps/havis.custom.harting.modbus.reader.app" datetime="${current.timestamp}" pattern="${timestamp.pattern}" />
 		</sequential>
 		<sequential>
 			<increment-timestamp />
 			<local name="current.timestamp" />
 			<property file="${timestamp.file}" />
-			<touch file="rfs/opt/depot/apps/havis.custom.harting.tools.app" datetime="${current.timestamp}" pattern="${timestamp.pattern}" />
+			<touch file="${build.dir}/rfs/opt/depot/apps/havis.custom.harting.tools.app" datetime="${current.timestamp}" pattern="${timestamp.pattern}" />
 		</sequential>
 		<sequential>
 			<increment-timestamp />
 			<local name="current.timestamp" />
 			<property file="${timestamp.file}" />
-			<touch file="rfs/opt/depot/apps/havis.custom.harting.monitortransport.app" datetime="${current.timestamp}" pattern="${timestamp.pattern}" />
+			<touch file="${build.dir}/rfs/opt/depot/apps/havis.custom.harting.monitortransport.app" datetime="${current.timestamp}" pattern="${timestamp.pattern}" />
 		</sequential>
 		<sequential>
 			<increment-timestamp />
 			<local name="current.timestamp" />
 			<property file="${timestamp.file}" />
-			<touch file="rfs/opt/depot/apps/havis.custom.harting.rfidhardwaremonitor.app" datetime="${current.timestamp}" pattern="${timestamp.pattern}" />
+			<touch file="${build.dir}/rfs/opt/depot/apps/havis.custom.harting.rfidhardwaremonitor.app" datetime="${current.timestamp}" pattern="${timestamp.pattern}" />
 		</sequential>
 	</target>
 </project>
