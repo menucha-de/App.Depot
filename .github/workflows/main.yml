@@ -55,7 +55,7 @@ jobs:
           imaging: ${{ github.event.inputs.imaging }}
           maintainer: ${{ github.event.inputs.maintainer }}
           support: ${{ github.event.inputs.support }}
-      - run: docker run --workdir /github/workspace --rm --privileged -e ARCH -e DIST -e APT -e MIRROR -e VERSION -e IMAGE -e MAINTAINER -e SUPPORT --entrypoint bash -v "$GITHUB_WORKSPACE":"/github/workspace" debian:stretch-slim "-c" "./mkimg"
+      - run: docker run --workdir /github/workspace --rm --privileged -e ARCH -e DIST -e APT -e MIRROR -e IVY -e VERSION -e IMAGE -e MAINTAINER -e SUPPORT --entrypoint bash -v "$GITHUB_WORKSPACE":"/github/workspace" debian:stretch-slim "-c" "./mkimg"
         if: ${{ github.event.inputs.imaging }}
         env:
           ARCH: 'armhf'
