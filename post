@@ -6,4 +6,4 @@ set -x
 env
 
 rm -rf $BUILD/rfs/opt/depot/files
-ant -Divy.resolver=$RESOLVER -Divy.url=$IVY -Divy.default.ivy.user.dir=/tmp -Divy.settings=ivysettings_remote.xml -Dapi.url=$API -Dplatform=linux-arm -Djavac.debug=$DEBUG
+ant -Divy.resolver=remotefs -Divy.url=$IVY -Divy.default.ivy.user.dir=/tmp -Divy.settings=ivysettings_remote.xml -Dapi.url=$API -Dplatform=linux-arm
