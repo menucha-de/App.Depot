@@ -10,6 +10,8 @@ mkdir -p /usr/share/man/man1
 apt-get update
 apt-get -y -q install apt-transport-https openjdk-8-jdk-headless ant ivy libjsch-java
 
+ln -s -T /usr/share/java/ivy.jar /usr/share/ant/lib/ivy.jar
+
 echo "deb [trusted=yes] $APT ${DIST%%-*} main" > /etc/apt/sources.list.d/local.list
 if [[ "${DIST##*-}" == "updates" ]] || [[ "${DIST##*-}" == "staging" ]]; then
   echo "deb [trusted=yes] $APT $DIST main" >> /etc/apt/sources.list.d/local.list
