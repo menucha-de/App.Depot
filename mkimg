@@ -6,7 +6,7 @@ set -e
 env
 
 apt-get update
-apt-get -y -q install apt-transport-https
+apt-get -y -q install apt-transport-https default-jdk-headless ant ivy libjsch-java
 
 echo "deb [trusted=yes] $APT ${DIST%%-*} main" > /etc/apt/sources.list.d/local.list
 if [[ "${DIST##*-}" == "updates" ]] || [[ "${DIST##*-}" == "staging" ]]; then
