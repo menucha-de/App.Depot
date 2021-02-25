@@ -1,5 +1,16 @@
 #!/bin/ash
 
+### BEGIN INIT INFO
+# Provides:		mkenv
+# Required-Start:	$remote_fs $syslog
+# Required-Stop:	$remote_fs $syslog
+# Default-Start:	2 3 4 5
+# Default-Stop:		0 1 6
+# Short-Description:	Ha-VIS mkenv
+# Description: 
+#
+### END INIT INFO
+
 . /etc/profile
 
 INFO_TEXT=$(echo '{"jsonrpc": "2.0", "id": 1,"method":"get_info_text", "params":{}}' | mica-rpc https://mica/ws/)
