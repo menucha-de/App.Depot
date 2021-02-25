@@ -7,7 +7,7 @@
 	<property name="resources.dir" location="${basedir}/resources" />
 	<property file="${resources.dir}/MANIFEST.MF" prefix="manifest" />
 	<property file="${resources.dir}/build.properties" />
-	<property name="timestamp.file" location="${build.dir}/timestamp.properties" />
+	<property name="timestamp.file" location="${basedir}/timestamp.properties" />
 	<property name="timestamp.pattern" value="yyyyMMddHHmmss" />
 
 	<filterset id="manifest" filtersfile="${resources.dir}/MANIFEST.MF" />
