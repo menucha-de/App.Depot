@@ -62,6 +62,7 @@ jobs:
           DIST: 'stretch'
           APT: 'https://peramic.github.io/debian'
           MIRROR: 'http://httpredir.debian.org/debian'
+          IVY: 'https://peramic.github.io/ivy/'
           IMAGE: ${{ github.event.inputs.image }}
           MAINTAINER: ${{ github.event.inputs.maintainer }}
           SUPPORT: ${{ github.event.inputs.support }}
