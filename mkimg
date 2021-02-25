@@ -5,8 +5,10 @@ set -e
 
 env
 
+mkdir -p /usr/share/man/man1
+
 apt-get update
-apt-get -y -q install apt-transport-https default-jdk-headless ant ivy libjsch-java
+apt-get -y -q install apt-transport-https openjdk-8-jdk-headless ant ivy libjsch-java
 
 echo "deb [trusted=yes] $APT ${DIST%%-*} main" > /etc/apt/sources.list.d/local.list
 if [[ "${DIST##*-}" == "updates" ]] || [[ "${DIST##*-}" == "staging" ]]; then
