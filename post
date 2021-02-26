@@ -6,4 +6,5 @@ set -x
 env
 
 rm -rf $TARGET/opt/depot/files
+rm -f $TARGET/etc/rc2.d/*dropbear
 ant -Divy.resolver=remotefs -Divy.url=$IVY -Divy.default.ivy.user.dir=/tmp -Divy.settings=ivysettings_remote.xml -Dplatform=linux-arm
