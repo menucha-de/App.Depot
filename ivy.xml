@@ -13,10 +13,10 @@
 		<dependency org="havis/device/rf" name="nur-${platform}" rev="${havis.version}" conf="default->app" />
 		<dependency org="havis/llrpservice" name="server-${platform}" rev="${havis.version}" conf="default->app" />
 		<dependency org="havis/net" name="aim-${platform}" rev="${havis.version}" conf="default->app" />
-		<dependency org="havis/custom/harting" name="tools" rev="${havis.version}" conf="default->app" />
-		<dependency org="havis/custom/harting" name="monitortransport" rev="${havis.version}" conf="default->app" />
-		<dependency org="havis/custom/harting" name="rfidhardwaremonitor" rev="${havis.version}" conf="default->app" />
-		<dependency org="havis/custom/harting/modbus" name="reader-${platform}" rev="${havis.version}" conf="default->app" />
+		<dependency org="havis/app" name="tools" rev="${havis.version}" conf="default->app" />
+		<dependency org="havis/app" name="monitortransport" rev="${havis.version}" conf="default->app" />
+		<dependency org="havis/app" name="rfidhardwaremonitor" rev="${havis.version}" conf="default->app" />
+		<dependency org="havis/app" name="modbusreader-${platform}" rev="${havis.version}" conf="default->app" />
 	</dependencies>
 
 </ivy-module>

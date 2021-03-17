@@ -16,19 +16,19 @@ on:
         description: 'Imaging'
       image:
         description: 'Image'
-        default: 'https://github.com/peramic/Tools.Debootstrap/releases/download/v2.7.0/debian_stretch_2.7.0.tar.gz'
+        default: 'https://github.com/menucha-de/Tools.Debootstrap/releases/download/v2.7.0/debian_stretch_2.7.0.tar.gz'
         required: true
       maintainer:
         description: 'Maintainer'
-        default: "Open Source <opensource@peraMIC.io>"
+        default: "Menucha Team <info@menucha.de>"
         required: true
       support:
         description: 'Support'
-        default: "support@peraMIC.io"
+        default: "info@menucha.de"
         required: true
       tags:
         description: 'Tags'
-        default: 'ghcr.io/peramic/depot:latest'
+        default: 'ghcr.io/menucha-de/depot:latest'
         required: true
       platforms:
         description: 'Platforms'
@@ -44,7 +44,7 @@ jobs:
         uses: docker/setup-qemu-action@v1
         if: ${{ github.event.inputs.imaging }}
       - name: Build
-        uses: peramic/actions/build-stretch@v1
+        uses: menucha-de/actions/build-stretch@v1
         if: ${{ github.event.inputs.packaging }}
         with:
           arch: ${{ github.event.inputs.arch }}
@@ -60,9 +60,9 @@ jobs:
         env:
           ARCH: 'armhf'
           DIST: 'stretch'
-          APT: 'https://peramic.github.io/debian'
+          APT: 'https://menucha-de.github.io/debian'
           MIRROR: 'http://httpredir.debian.org/debian'
-          IVY: 'https://peramic.github.io/ivy/'
+          IVY: 'https://menucha-de.github.io/ivy/'
           IMAGE: ${{ github.event.inputs.image }}
           MAINTAINER: ${{ github.event.inputs.maintainer }}
           SUPPORT: ${{ github.event.inputs.support }}
